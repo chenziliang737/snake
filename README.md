@@ -10,10 +10,12 @@
 
 
 
-![](https://github.com/chenziliang737/snake/blob/main/images/游戏页面.png?raw=true)
+下载SnakeGame.exe，点击即玩。
+
+![](https://github.com/chenziliang737/snake/blob/main/images/image1.png?raw=true)
 
 游戏页面
 
-![](https://github.com/chenziliang737/snake/blob/main/images/游戏结束页面.png?raw=true)
+![](https://github.com/chenziliang737/snake/blob/main/images/image2.png?raw=true)
 
 游戏结束页面

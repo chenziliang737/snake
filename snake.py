@@ -42,7 +42,7 @@ OBSTACLE_RECTS_MAX = 3
 class SnakeGame:
     def __init__(self):
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-        pygame.display.set_caption("贪吃蛇 - 随机边界+少量障碍物")
+        pygame.display.set_caption("SnakeGame")
         self.clock = pygame.time.Clock()
         self.font = pygame.font.Font("C:/Windows/Fonts/SimHei.ttf", 30)
         self.ai_mode = True
@@ -371,17 +371,20 @@ class SnakeGame:
             pygame.draw.rect(self.screen, color, seg_rect)
             pygame.draw.rect(self.screen, BLACK, seg_rect, 1)
 
-        score_text = self.font.render(f"分数: {self.score}", True, WHITE)
+        score_text = self.font.render(f"score: {self.score}", True, WHITE)
         self.screen.blit(score_text, (10, 10))
 
-        mode_text = "AI模式" if self.ai_mode else "手动模式"
+        mode_text = "AI Mode" if self.ai_mode else "Manual Mode"
         mode_surface = self.font.render(mode_text, True, WHITE)
-        self.screen.blit(mode_surface, (WINDOW_WIDTH - 150, 10))
+        self.screen.blit(mode_surface, (WINDOW_WIDTH - 200, 10))
 
         if self.game_over:
-            over_text = self.font.render("游戏结束！按 C 重新开始，按 Q 退出", True, WHITE)
-            text_rect = over_text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
-            self.screen.blit(over_text, text_rect)
+            over_text_1 = self.font.render("Game Over!", True, WHITE)
+            text_rect_1 = over_text_1.get_rect(center=(WINDOW_WIDTH // 2 , WINDOW_HEIGHT // 2 - 30))
+            self.screen.blit(over_text_1, text_rect_1)
+            over_text_2 = self.font.render("Press C to restart, or press Q to quit", True, WHITE)
+            text_rect_2 = over_text_2.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 + 30))
+            self.screen.blit(over_text_2, text_rect_2)
         pygame.display.flip()
 
     def run(self):
