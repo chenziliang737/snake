@@ -10,10 +10,10 @@
 
 
 
-![](图片\游戏页面.png)
+![游戏页面](https://github.com/chenziliang737/snake/blob/main/images/游戏页面.png?raw=true)
 
 游戏页面
 
-![](图片\游戏结束页面.png)
+![游戏页面](https://github.com/chenziliang737/snake/blob/main/images/游戏页面.png?raw=true)
 
 游戏结束页面
