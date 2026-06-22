@@ -9,7 +9,6 @@ pygame.init()
 WINDOW_WIDTH = 600
 WINDOW_HEIGHT = 600
 CELL_SIZE = 20
-assert WINDOW_WIDTH % CELL_SIZE == 0 and WINDOW_HEIGHT % CELL_SIZE == 0, "窗口尺寸必须是单元格大小的整数倍"
 
 COLS = WINDOW_WIDTH // CELL_SIZE
 ROWS = WINDOW_HEIGHT // CELL_SIZE
@@ -163,6 +162,7 @@ class SnakeGame:
         for pos in self.valid_cells:
             if pos not in self.snake:
                 return pos
+
     def is_safe_cell(self, pos, snake_body):
         x, y = pos
         for dx, dy in [(0,1), (0,-1), (1,0), (-1,0)]:
@@ -171,6 +171,7 @@ class SnakeGame:
                 if (nx, ny) not in snake_body:
                     return True
         return False
+
     def try_place_snake(self, safe_dist):
         for _ in range(SNAKE_PLACE_ATTEMPTS_PER_MAP):
             head = random.choice(self.valid_cells)
@@ -238,7 +239,6 @@ class SnakeGame:
                 else:
                     if event.key == pygame.K_SPACE:
                         self.ai_mode = not self.ai_mode
-                        print("AI模式:", "开启" if self.ai_mode else "关闭")
                     if not self.ai_mode:
                         if event.key == pygame.K_UP and self.direction != DOWN:
                             self.next_direction = UP
@@ -248,8 +248,8 @@ class SnakeGame:
                             self.next_direction = LEFT
                         elif event.key == pygame.K_RIGHT and self.direction != LEFT:
                             self.next_direction = RIGHT
+
     def bfs_path(self, start, target):
-        from collections import deque
         visited = set()
         parent = {}
         q = deque([start])
@@ -277,8 +277,8 @@ class SnakeGame:
                     parent[nxt] = cur
                     q.append(nxt)
         return None
+
     def count_reachable(self, start, avoid):
-        from collections import deque
         visited = set([start])
         q = deque([start])
         count = 0
@@ -293,6 +293,7 @@ class SnakeGame:
                         visited.add(nxt)
                         q.append(nxt)
         return count
+
     def get_ai_direction(self):
         head = self.snake[0]
         path = self.bfs_path(head, self.food)
@@ -331,6 +332,7 @@ class SnakeGame:
                     return (dx, dy)
 
         return self.direction
+
     def update(self):
         if self.game_over:
             return
@@ -368,8 +370,14 @@ class SnakeGame:
             color = GREEN if i == 0 else DARK_GREEN
             pygame.draw.rect(self.screen, color, seg_rect)
             pygame.draw.rect(self.screen, BLACK, seg_rect, 1)
+
         score_text = self.font.render(f"分数: {self.score}", True, WHITE)
         self.screen.blit(score_text, (10, 10))
+
+        mode_text = "AI模式" if self.ai_mode else "手动模式"
+        mode_surface = self.font.render(mode_text, True, WHITE)
+        self.screen.blit(mode_surface, (WINDOW_WIDTH - 150, 10))
+
         if self.game_over:
             over_text = self.font.render("游戏结束！按 C 重新开始，按 Q 退出", True, WHITE)
             text_rect = over_text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
