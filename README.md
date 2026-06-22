@@ -10,7 +10,7 @@
 
 
 
-下载SnakeGame.exe，点击即玩。
+下载dist文件夹，打开SnakeGame.exe，点击即玩。
 
 ![](https://github.com/chenziliang737/snake/blob/main/images/image1.png?raw=true)
 
